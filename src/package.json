@@ -1,0 +1,23 @@
+{
+  "name": "codewords-monitor",
+  "version": "0.1.0",
+  "description": "Monitors state of solving a board, publishes board.solved facts",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ArtCoeur/codewords-monitor.git"
+  },
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha test"
+  },
+  "author": "Tim Rodger tim.rodger@gmail.com",
+  "dependencies": {
+    "underscore": "~1.7.0",
+    "rabbit.js": "~0.4.2",
+    "winston": "~0.8.3"
+  },
+  "devDependencies": {
+    "should": "~4.3.0",
+    "mocha": "~2.0.1"
+  }
+}
