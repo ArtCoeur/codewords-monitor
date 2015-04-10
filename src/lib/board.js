@@ -48,3 +48,5 @@ Board.prototype.duration = function(){
 Board.prototype.isSolved = function(){
     return this.cells.length == 26;
 };
+
+module.exports = Board;
