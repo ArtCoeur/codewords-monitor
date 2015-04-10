@@ -18,12 +18,14 @@ function doConnect(){
             var sub = context.socket('SUB'),
                 pub = context.socket('PUB');
 
-            sub.connect('events', function () {
+            pub.connect('events', function() {
+                sub.connect('events', function () {
 
-                // deal with facts as they come in
-                sub.on('data', function (body) {
-                    logger.info('monitor : ' + body);
-                    router.newFact(pub, JSON.parse(body));
+                    // deal with facts as they come in
+                    sub.on('data', function (body) {
+                        logger.info('monitor : ' + body);
+                        router.newFact(pub, JSON.parse(body));
+                    });
                 });
             });
         });
