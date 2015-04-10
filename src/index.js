@@ -1,5 +1,4 @@
 var logger = require('./lib/logger'),
-    pattern = require('./lib/pattern'),
     router = require('./lib/router'),
     rabbitmq = require('rabbit.js');
 
