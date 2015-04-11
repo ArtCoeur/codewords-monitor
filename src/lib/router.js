@@ -1,4 +1,5 @@
-var Board = require('./board');
+var Board = require('./board'),
+    logger = require('./logger');
 
 var boards = {};
 
@@ -10,37 +11,53 @@ var boards = {};
  */
 module.exports.newFact = function(pub, fact) {
 
+    // stop processing facts for this board now
+    var board = boards[fact.board];
+    if (board){
+        if (board.isSolved()) {
+            return;
+        }
+    }
+
     switch (fact.name){
         case 'board.new':
-            boards[fact.board] = new Board(fact.board);
+            board = new Board(fact.board);
+            boards[fact.board] = board;
             break;
 
         case 'word.new':
-            boards[fact.board].addWord(fact.data.body);
+            board.addWord(fact.data.body);
             break;
 
         case 'cell.updated':
-            boards[fact.board].letterSolved(fact.data.body.number, fact.data.body.letter);
+            board.letterSolved(fact.data.body.number, fact.data.body.letter);
             break;
 
         default :
             //
     }
 
-    // test if the board is solved
-    if (boards[fact.board].isSolved()){
+
+    if (!board) {
+        return;
+    }
+
+    // test if the board has just become solved
+    if (board.isSolved()){
+
         pub.write(JSON.stringify({
             board: fact.board,
             name: 'board.solved',
             data : {
                 body: {
-                    duration: boards[fact.board].duration()
+                    duration: board.duration()
                 },
                 type: "application/json"
             }
         }));
     } else {
-        // publish other facts or log info?
+        // log what's left
+        logger.info("Board: " + fact.board + " unsolved " + JSON.stringify(board.unsolved()));
     }
 
 };

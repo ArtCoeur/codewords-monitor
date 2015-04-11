@@ -26,7 +26,7 @@ Board.prototype.addWord = function(word){
  * @param letter
  */
 Board.prototype.letterSolved = function(number, letter){
-    this.cells.push({number: number, letter: letter});
+    this.cells.push({number: number, letter: letter.toLowerCase()});
 
     if (this.isSolved()){
         this.end = new Date();
@@ -47,6 +47,18 @@ Board.prototype.duration = function(){
  */
 Board.prototype.isSolved = function(){
     return this.cells.length == 26;
+};
+
+/**
+ * @return an array of the outstanding letters
+ */
+Board.prototype.unsolved = function(){
+    var all = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+    var current = [];
+    _.each(this.cells, function(item){
+       current.push(item['letter']);
+    });
+    return _.difference(all, current);
 };
 
 module.exports = Board;
