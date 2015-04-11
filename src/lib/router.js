@@ -11,7 +11,7 @@ var boards = {};
  */
 module.exports.newFact = function(pub, fact) {
 
-    // stop processing facts for this board now
+    // stop processing facts for the board if it is already solved
     var board = boards[fact.board];
     if (board){
         if (board.isSolved()) {
@@ -31,33 +31,29 @@ module.exports.newFact = function(pub, fact) {
 
         case 'cell.updated':
             board.letterSolved(fact.data.body.number, fact.data.body.letter);
+            logger.info('monitor : ' + JSON.stringify(fact));
+
+            // test if the board has just become solved
+            if (board.isSolved()){
+
+                pub.write(JSON.stringify({
+                    board: fact.board,
+                    name: 'board.solved',
+                    data : {
+                        body: {
+                            duration: board.duration()
+                        },
+                        type: "application/json"
+                    }
+                }));
+
+            } else {
+                // log what's left
+                logger.info("Board: " + fact.board + " unsolved " + JSON.stringify(board.unsolved()));
+            }
             break;
 
         default :
-            //
+            // nothing
     }
-
-
-    if (!board) {
-        return;
-    }
-
-    // test if the board has just become solved
-    if (board.isSolved()){
-
-        pub.write(JSON.stringify({
-            board: fact.board,
-            name: 'board.solved',
-            data : {
-                body: {
-                    duration: board.duration()
-                },
-                type: "application/json"
-            }
-        }));
-    } else {
-        // log what's left
-        logger.info("Board: " + fact.board + " unsolved " + JSON.stringify(board.unsolved()));
-    }
-
 };
