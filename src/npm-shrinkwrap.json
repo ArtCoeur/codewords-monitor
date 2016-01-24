@@ -319,12 +319,12 @@
               "dependencies": {
                 "lru-cache": {
                   "version": "2.7.3",
-                  "from": "https://registry.npmjs.org/lru-cache/-/lru-cache-2.7.3.tgz",
+                  "from": "lru-cache@2.7.3",
                   "resolved": "https://registry.npmjs.org/lru-cache/-/lru-cache-2.7.3.tgz"
                 },
                 "sigmund": {
                   "version": "1.0.1",
-                  "from": "https://registry.npmjs.org/sigmund/-/sigmund-1.0.1.tgz",
+                  "from": "sigmund@~1.0.0",
                   "resolved": "https://registry.npmjs.org/sigmund/-/sigmund-1.0.1.tgz"
                 }
               }
