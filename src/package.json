@@ -12,7 +12,7 @@
   },
   "author": "Tim Rodger tim.rodger@gmail.com",
   "dependencies": {
-    "underscore": "^1.8.0",
+    "underscore": "^1.7.0",
     "rabbit.js": "^0.4.2",
     "winston": "^0.8.3",
     "forever": "^0.14.1"
