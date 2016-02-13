@@ -12,13 +12,13 @@
   },
   "author": "Tim Rodger tim.rodger@gmail.com",
   "dependencies": {
-    "underscore": "~1.7.0",
-    "rabbit.js": "~0.4.2",
-    "winston": "~0.8.3",
-    "forever": "~0.14.1"
+    "underscore": "^1.8.0",
+    "rabbit.js": "^0.4.2",
+    "winston": "^0.8.3",
+    "forever": "^0.14.1"
   },
   "devDependencies": {
-    "should": "~4.3.0",
-    "mocha": "~2.0.1"
+    "should": "^4.3.0",
+    "mocha": "^2.0.1"
   }
 }
